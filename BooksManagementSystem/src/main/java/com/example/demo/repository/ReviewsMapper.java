@@ -8,10 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import com.example.demo.entity.Reviews;
 
 @Mapper
-public interface ReviewMapper {
+public interface ReviewsMapper {
 	List<Reviews> selectAll();
-	Reviews selectById(@Param("id") Integer id);
+	Reviews selectById(@Param("book_id") Integer id);
 	void insert(Reviews reviews);
 	void update(Reviews reviews);
-	void delete(@Param("id") Integer id);
+	void delete(@Param("book_id") Integer id);
 }

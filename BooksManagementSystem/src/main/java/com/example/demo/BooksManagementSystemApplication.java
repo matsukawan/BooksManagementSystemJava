@@ -29,18 +29,21 @@ public class BooksManagementSystemApplication {
 		System.out.println(service.findByIdBooks(1));
 		
 		Books books = new Books();
-		books.setBook_name("リポジトリのテスト");
+		books.setBook_name("5");
 		books.setAuthor("DBへの登録処理");
-		books.setPublisher("DBへの登録処理");
-		books.setPrice(10000);
-		books.setIsbn("10000-00000");
-		books.setNum_of_books(1);
-		books.setBook_image_url("com.example.jpg");
+//		books.setReviews(reviews);
 		service.insertBooks(books);
 		System.out.println("=== 登録確認 ===");
-		System.out.println(service.findByIdBooks(4));
+		System.out.println(service.findByIdBooks(5));
 		
-		service.deleteBooks(4);
+//		Reviews target = service.findByIdBooks(5);
+//		target.setRating(5);
+//		target.setComment("DBへの更新処理");
+//		service.updateBooks(target);
+//		System.out.println("=== 更新確認 ===");
+//		System.out.println(service.findByIdBooks(5));
+		
+		service.deleteBooks(5);
 		System.out.println("=== 削除確認 ===");
 		for(Books row : service.findAllBooks()) {
 			System.out.println(row);

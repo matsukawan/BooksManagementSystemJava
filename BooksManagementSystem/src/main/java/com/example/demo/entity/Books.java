@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +21,6 @@ public class Books {
 	private String book_image_url;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-
+	private List<Reviews> reviews;
+	
 }

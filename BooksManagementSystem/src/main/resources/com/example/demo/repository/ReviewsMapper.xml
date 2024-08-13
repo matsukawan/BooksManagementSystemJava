@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.ReviewsMapper">
+	<select id="selectAll" resultType="com.example.demo.entity.Reviews">
+		SELECT id, emp_id, rating, comment, book_id,created_at as createdAt, updated_at as updateAt FROM reviews
+	</select>
+	
+	<select id="selectById" resultType="com.example.demo.entity.Reviews">
+		SELECT id, emp_id, rating, comment, book_id,created_at as createdAt, updated_at as updateAt FROM reviews WHERE id = #{book_id}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO reviews (rating,comment,created_at,updated_at)
+		VALUES (#{rating}, #{comment}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+	</insert>
+	
+	<update id="update">
+		UPDATE reviews SET rating = #{rating}, comment = #{comment},updated_at = CURRENT_TIMESTAMP WHERE id = #{book_id} 
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM reviews WHERE id = #{book_id}
+	</delete>
+</mapper>

@@ -18,6 +18,9 @@ VALUES (2,5,'控えめに言って最高。',2);
 INSERT INTO reviews(emp_id,rating,comment,book_id)
 VALUES (2,3,'普通の読後感でした。',3);
 
+INSERT INTO reviews(emp_id,rating,comment,book_id)
+VALUES (2,4,'最高の本でした',1);
+
 --社員情報
 INSERT INTO employees(emp_name,emp_id,password,dep_id)
 VALUES ('総務太郎','soumutarou','soumu1',1);

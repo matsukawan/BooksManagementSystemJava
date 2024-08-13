@@ -23,20 +23,21 @@ public class BooksController {
 	private final BooksService booksService;
 	
 	@GetMapping
-	public String list(Model model) {
+	public String list(Model model) {	
 		model.addAttribute("books",booksService.findAllBooks());
 		return "books/mainMenu";
 	}
 	
 	@GetMapping("/{id}")
 	public String detail(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
-		Books Books = booksService.findByIdBooks(id);
-		if(Books != null) {
-			model.addAttribute("books",booksService.findByIdBooks(id));
+		Books books = booksService.findByIdBooks(id);
+		if(books != null) {
+			model.addAttribute("books", books);
+			model.addAttribute("reviews",books.getReviews());
 			return "books/detail";
 		}else {
 			attributes.addFlashAttribute("errorMessage","対象データがありません");
-			return "/redirect:/mainMenu";
+			return "redirect:/mainMenu";
 		}
 	}
 	
@@ -64,6 +65,8 @@ public class BooksController {
 			attributes.addFlashAttribute("errorMessage","対象データがありません。");
 			return "redirect:/mainMenu";
 		}
+		
+		
 	}
 	
 	@PostMapping("/delete/{id}")
