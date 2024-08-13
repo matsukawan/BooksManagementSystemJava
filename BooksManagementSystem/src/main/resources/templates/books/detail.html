@@ -24,6 +24,9 @@
 			<td th:text="${books.updatedAt.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy/MM/dd HH:mm:ss'))}"></td>
 		</tr>
 	</table>
+	<form th:action="@{/mainMenu/delete/{id}(id=${books.id})}" method="post">
+		<input type="submit" value="削除">
+	</form>
 	<a th:href="@{/mainMenu}">メインメニューへ</a>
 </body>
 </html>
