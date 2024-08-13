@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>レビューフォーム</title>
+</head>
+<body>
+	<p th:if="${reviewsForm.isNew}">レビュー投稿</p>
+	<p th:unless="${reviewsForm.isNew}">レビュー編集</p>
+	<form th:action="${reviewsForm.isNew} ? @{/mainMenu/review-create/{id}} : @{/mainMenu/update}" th:object="${reviewsForm}" method="post">
+		<input type="hidden" th:field="*{id}">
+		<input type="hidden" th:field="*{emp_id}">
+		<input type="hidden" th:field="*{book_id}">
+		<table>
+			<tr>
+				<th>おすすめ度：</th>
+				<td>
+					<input type="text" th:field="*{rating}"/>
+				</td>
+			</tr>
+			<tr>
+				<th>コメント：</th>
+				<td>
+					<textarea rows="5" cols="30" th:field="*{comment}"></textarea>
+				</td>
+			</tr>
+		</table>
+		<input th:if="${reviewsForm.isNew}" type="submit" value="投稿">
+		<input th:unless="${reviewsForm.isNew}" type="submit" value="編集">
+	</form>
+	<a href="@{/mainMenu}">戻る</a>
+</body>
+</html>

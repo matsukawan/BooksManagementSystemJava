@@ -49,6 +49,8 @@
 	<form th:action="@{/mainMenu/delete/{id}(id=${books.id})}" method="post">
 		<input type="submit" value="削除">
 	</form>
+	<a th:href="@{/mainMenu/review-form}">新規登録</a>
+	<a th:href="@{/mainMenu/review-edit/{id}(id=${books.id})}">レビュー投稿</a>
 	<a th:href="@{/mainMenu}">メインメニューへ</a>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
