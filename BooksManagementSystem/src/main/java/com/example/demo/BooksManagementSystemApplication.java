@@ -31,7 +31,6 @@ public class BooksManagementSystemApplication {
 		Books books = new Books();
 		books.setBook_name("4");
 		books.setAuthor("DBへの登録処理");
-//		books.setReviews(reviews);
 		service.insertBooks(books);
 		System.out.println("=== 登録確認 ===");
 		System.out.println(service.findByIdBooks(4));

@@ -38,9 +38,11 @@ public class BooksController {
 	@GetMapping("/{id}")
 	public String detail(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
 		Books books = booksService.findByIdBooks(id);
+		System.out.println(id);
+		System.out.println(books);
 		if(books != null) {
 			model.addAttribute("books", books);
-			model.addAttribute("reviews",books.getReviews());
+			model.addAttribute("reviews", books.getReviews());
 			return "books/detail";
 		}else {
 			attributes.addFlashAttribute("errorMessage","対象データがありません");
