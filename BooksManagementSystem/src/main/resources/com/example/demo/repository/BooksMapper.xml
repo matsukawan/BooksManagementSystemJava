@@ -7,9 +7,9 @@
 	</select>
 	
 	<select id="selectById" resultMap="booksResult">
-		SELECT books.id,book_name,author,publisher,price,isbn,num_of_books,book_image_url,
-		books.created_at as createdAt,books.updated_at as updatedAt,
-		emp_id,rating,comment,book_id FROM books INNER JOIN reviews ON books.id = reviews.book_id WHERE books.id = #{id}
+		SELECT b.id,b.book_name,b.author,b.publisher,b.price,b.isbn,b.num_of_books,b.book_image_url,
+		b.created_at as createdAt,b.updated_at as updatedAt,rating,comment
+		FROM books b LEFT JOIN reviews r ON b.id = r.book_id WHERE b.id = #{id}
 	</select>
 	<resultMap type="com.example.demo.entity.Books" id="booksResult">
 		<id column="id" property="id"/>
