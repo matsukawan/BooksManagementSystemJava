@@ -49,6 +49,9 @@
 	<form th:action="@{/mainMenu/delete/{id}(id=${books.id})}" method="post">
 		<input type="submit" value="削除">
 	</form>
+	<form th:action="@{/mainMenu/review-delete/{id}(id=${books.id})}" method="post">
+		<input type="submit" value="レビュー削除">
+	</form>
 	<a th:href="@{/mainMenu/review-form/{id}(id=${books.id})}">新規登録</a>
 	<a th:href="@{/mainMenu/review-edit/{id}(id=${books.id})}">レビュー編集</a>
 	<a th:href="@{/mainMenu}">メインメニューへ</a>

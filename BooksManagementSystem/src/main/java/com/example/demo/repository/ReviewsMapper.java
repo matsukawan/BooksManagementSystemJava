@@ -13,5 +13,5 @@ public interface ReviewsMapper {
 	Reviews selectById(@Param("book_id") Integer id);
 	void insert(Reviews reviews);
 	void update(Reviews reviews);
-	void delete(@Param("id") Integer id);
+	void delete(@Param("book_id") Integer id);
 }

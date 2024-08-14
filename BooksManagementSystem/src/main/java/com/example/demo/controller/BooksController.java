@@ -113,4 +113,11 @@ public class BooksController {
 		attributes.addFlashAttribute("message","レビューを変更しました");
 		return "redirect:/mainMenu";
 	}
+	
+	@PostMapping("/review-delete/{id}")
+	public String reviewDelete(@PathVariable Integer id, RedirectAttributes attributes) {
+		reviewsService.deleteReviews(id);
+		attributes.addFlashAttribute("message","レビューを削除しました");
+		return "redirect:/mainMenu";
+	}
 }
