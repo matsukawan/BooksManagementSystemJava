@@ -18,6 +18,12 @@ body {
 	background-color: white;
 }
 
+.table-registration{
+	border: 1;
+	width: auto;
+	background-color: white;
+}
+
 .review {
 	margin: auto;
 	border-color: black;
