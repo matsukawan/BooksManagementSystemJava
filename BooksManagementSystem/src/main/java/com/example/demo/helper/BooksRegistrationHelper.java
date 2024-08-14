@@ -10,17 +10,17 @@ public class BooksRegistrationHelper {
 		books.setAuthor(form.getAuthor());
 		books.setPublisher(form.getPublisher());
 		books.setIsbn(form.getIsbn());
-//		books.setBook_image_url(form.getBook_image_url());
+		books.setBook_image_url(form.getBook_image_url());
 		return books;
 	}
 	
 	public static BooksRegistrationForm convertBooksRegistrationForm(Books books) {
 		BooksRegistrationForm form = new BooksRegistrationForm();
 		form.setBook_name(books.getBook_name());
-		form.setAuthor(form.getAuthor());
-		form.setPublisher(form.getPublisher());
-		form.setIsbn(form.getIsbn());
-//		form.setBook_image_url(form.getBook_image_url());
+		form.setAuthor(books.getAuthor());
+		form.setPublisher(books.getPublisher());
+		form.setIsbn(books.getIsbn());
+		form.setBook_image_url(books.getBook_image_url());
 		return form;
 	}
 }

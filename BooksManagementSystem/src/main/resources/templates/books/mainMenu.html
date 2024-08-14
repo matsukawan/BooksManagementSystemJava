@@ -11,7 +11,7 @@
 	<p th:if="${errorMessage}" th:text="${errorMessage}" style="color:red">
 		エラーメッセージ
 	</p>
-	<table border="1" width="300">
+	<table border="1" width="500">
 		<thead>
 			<tr>
 				<th>書籍名</th>
@@ -19,6 +19,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="books : ${books}">
+				<td><img th:src="${books.book_image_url}" alt="画像" height="200" width="150"></td>
 				<td th:text="${books.book_name}"></td>
 				<td><a th:href="@{/mainMenu/{id}(id=${books.id})}">詳細</a></td>
 			</tr>

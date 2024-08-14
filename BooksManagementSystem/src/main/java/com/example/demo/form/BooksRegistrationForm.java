@@ -19,6 +19,6 @@ public class BooksRegistrationForm {
 	private String publisher;
 	@NotBlank(message = "ISBNを入力してください")
 	private String isbn;
-//	private String book_image_url;
+	private String book_image_url;
 	private Boolean isNew;
 }
