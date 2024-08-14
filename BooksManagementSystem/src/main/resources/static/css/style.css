@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+body {
+	background-color: brown;
+	text-align: center;
+}
+
+.table {
+	margin: auto;
+	border: 1;
+	width: 225px;
+}
+
+.review {
+	margin: auto;
+	border: 1;
+	width: 500px;
+}
+
+.flex {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.flex>* {
+  flex: 0 0 33.3333%;
+}
+
+.ellipsis {
+	width: 225px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
