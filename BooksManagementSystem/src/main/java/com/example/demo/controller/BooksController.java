@@ -79,13 +79,13 @@ public class BooksController {
 		return "redirect:/mainMenu";
 	}
 	
-	@GetMapping("/review-form")
+	@GetMapping("/review-form/{id}")
 	public String newReview(@ModelAttribute ReviewsForm form) {
 		form.setIsNew(true);
 		return "books/reviewform";
 	}
 	
-	@PostMapping("/review-create")
+	@PostMapping("/review-create/{id}")
 	public String reviewCreate(ReviewsForm form, RedirectAttributes attributes) {
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviewsService.insertReviews(reviews);
