@@ -10,4 +10,5 @@ public interface ReviewsService {
 	void insertReviews(Reviews reviews);
 	void updateReviews(Reviews reviews);
 	void deleteReviews(Integer id);
+	void deleteAllReviews(Integer id);
 }

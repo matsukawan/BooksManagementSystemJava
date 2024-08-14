@@ -12,6 +12,7 @@
 	<form th:action="${reviewsForm.isNew} ? @{/mainMenu/review-create/{id}} : @{/mainMenu/update}" th:object="${reviewsForm}" method="post">
 		<input type="hidden" th:field="*{id}">
 
+	
 		<table class="table">
 			<tr>
 				<th>おすすめ度：</th>

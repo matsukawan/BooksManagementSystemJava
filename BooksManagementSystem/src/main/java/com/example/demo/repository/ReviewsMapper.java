@@ -14,4 +14,5 @@ public interface ReviewsMapper {
 	void insert(Reviews reviews);
 	void update(Reviews reviews);
 	void delete(@Param("book_id") Integer id);
+	void deleteAll(@Param("book_id") Integer id);
 }

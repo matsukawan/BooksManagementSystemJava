@@ -20,7 +20,7 @@ public class ReviewsForm {
 	private String comment;
 	private Integer emp_id;
 	private Integer book_id;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private LocalDateTime reviewsCreatedAt;
+	private LocalDateTime reviewsUpdatedAt;
 	private Boolean isNew;
 }

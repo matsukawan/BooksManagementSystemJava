@@ -22,7 +22,7 @@ public class ReviewsServiceImpl implements ReviewsService {
 	public List<Reviews> findAllReviews() {
 		return reviewsMapper.selectAll();
 	}
-
+	
 	@Override
 	public Reviews findByIdReviews(Integer id) {
 		return reviewsMapper.selectById(id);
@@ -41,7 +41,11 @@ public class ReviewsServiceImpl implements ReviewsService {
 	@Override
 	public void deleteReviews(Integer id) {
 		reviewsMapper.delete(id);
-
+	}
+	
+	@Override
+	public void deleteAllReviews(Integer id){
+		reviewsMapper.deleteAll(id);
 	}
 
 }

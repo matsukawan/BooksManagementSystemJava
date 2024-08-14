@@ -82,6 +82,7 @@ public class BooksController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id, RedirectAttributes attributes) {
+		reviewsService.deleteAllReviews(id);
 		booksService.deleteBooks(id);
 		attributes.addFlashAttribute("message", "書籍情報を削除しました。");
 		return "redirect:/mainMenu";

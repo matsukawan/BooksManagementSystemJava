@@ -15,6 +15,6 @@ public class Reviews {
 	private Integer rating;
 	private String comment;
 	private Integer book_id;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private LocalDateTime reviewsCreatedAt;
+	private LocalDateTime reviewsUpdatedAt;
 }
