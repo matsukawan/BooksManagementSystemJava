@@ -1,5 +1,7 @@
 package com.example.demo.form;
 
+import jakarta.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BooksRegistrationForm {
 //	private Integer id;
+	@NotBlank(message = "書籍名を入力してください")
 	private String book_name;
+	@NotBlank(message = "著者名を入力してください")
 	private String author;
+	@NotBlank(message = "出版社名を入力してください")
 	private String publisher;
+	@NotBlank(message = "ISBNを入力してください")
 	private String isbn;
 //	private String book_image_url;
+	private Boolean isNew;
 }

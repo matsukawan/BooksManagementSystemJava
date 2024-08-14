@@ -15,13 +15,15 @@
 			<tr>
 				<th>おすすめ度：</th>
 				<td>
-					<input type="text" th:field="*{rating}"/>
+					<input type="number" th:field="*{rating}" min="1" max="5"/>
+					<span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" style="color: red;">
 				</td>
 			</tr>
 			<tr>
 				<th>コメント：</th>
 				<td>
-					<textarea rows="5" cols="30" th:field="*{comment}"></textarea>
+					<textarea rows="5" cols="30" th:field="*{comment}" maxlength="255"></textarea>
+					<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color: red;">
 				</td>
 			</tr>
 		</table>

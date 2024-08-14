@@ -16,24 +16,28 @@
 				<th>ISBN</th>
 				<td>
 					<input type="text" th:field="*{isbn}">
+					<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" style="color: red;">
 				</td>
 			</tr>
 			<tr>
 				<th>書籍名</th>
 				<td>
 					<input type="text" th:field="*{book_name}">
+					<span th:if="${#fields.hasErrors('book_name')}" th:errors="*{book_name}" style="color: red;">
 				</td>
 			</tr>
 			<tr>
 				<th>著者</th>
 				<td>
 					<input type="text" th:field="*{author}">
+					<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}" style="color: red;">
 				</td>
 			</tr>
 			<tr>
 				<th>出版社</th>
 				<td>
 					<input type="text" th:field="*{publisher}">
+					<span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}" style="color: red;">
 				</td>
 			</tr>
 		</table>

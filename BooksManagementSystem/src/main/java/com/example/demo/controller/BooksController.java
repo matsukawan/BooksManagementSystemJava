@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +54,11 @@ public class BooksController {
 	}
 	
 	@PostMapping("/save")
-	public String registration(BooksRegistrationForm form,RedirectAttributes attributes) {
+	public String registration(@Validated BooksRegistrationForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+		if(bindingResult.hasErrors()) {
+			form.setIsNew(true);
+			return "books/registrationform";
+		}
 		Books Books = BooksRegistrationHelper.convertBooks(form);
 		booksService.insertBooks(Books);
 		attributes.addFlashAttribute("message","新規書籍情報を登録しました。");
@@ -86,7 +92,11 @@ public class BooksController {
 	}
 	
 	@PostMapping("/review-create/{id}")
-	public String reviewCreate(ReviewsForm form, RedirectAttributes attributes) {
+	public String reviewCreate(@Validated ReviewsForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+		if(bindingResult.hasErrors()) {
+			form.setIsNew(true);
+			return "/books/reviewform";
+		}		
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviewsService.insertReviews(reviews);
 		attributes.addFlashAttribute("message","レビューを投稿しました。");
@@ -99,7 +109,7 @@ public class BooksController {
 		if(target != null) {
 			ReviewsForm form = ReviewsHelper.convertReviewsForm(target);
 			model.addAttribute("reviewsForm",form);
-			return "books/reviewform";
+			return "/books/reviewform";
 		}else {
 			attributes.addFlashAttribute("errorMessage","対象データがありません");
 			return "redirect:/mainMenu";
@@ -107,7 +117,11 @@ public class BooksController {
 	}
 	
 	@PostMapping("/update")
-	public String update(ReviewsForm form,RedirectAttributes attributes) {
+	public String update(@Validated ReviewsForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+		if(bindingResult.hasErrors()) {
+			form.setIsNew(false);
+			return "/books/reviewform";
+		}
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviewsService.updateReviews(reviews);
 		attributes.addFlashAttribute("message","レビューを変更しました");
