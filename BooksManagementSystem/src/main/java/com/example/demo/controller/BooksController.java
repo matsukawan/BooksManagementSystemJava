@@ -23,7 +23,7 @@ import com.example.demo.service.ReviewsService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/mainMenu")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class BooksController {
 	private final BooksService booksService;
@@ -64,7 +64,7 @@ public class BooksController {
 		Books Books = BooksRegistrationHelper.convertBooks(form);
 		booksService.insertBooks(Books);
 		attributes.addFlashAttribute("message","新規書籍情報を登録しました。");
-		return "redirect:/mainMenu";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/edit/{id}")
@@ -76,7 +76,7 @@ public class BooksController {
 			return "books/registrationform";
 		}else {
 			attributes.addFlashAttribute("errorMessage","対象データがありません。");
-			return "redirect:/mainMenu";
+			return "redirect:/";
 		}
 	}
 	
@@ -85,7 +85,7 @@ public class BooksController {
 		reviewsService.deleteAllReviews(id);
 		booksService.deleteBooks(id);
 		attributes.addFlashAttribute("message", "書籍情報を削除しました。");
-		return "redirect:/mainMenu";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/review-form/{id}")
@@ -103,7 +103,7 @@ public class BooksController {
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviewsService.insertReviews(reviews);
 		attributes.addFlashAttribute("message","レビューを投稿しました。");
-		return "redirect:/mainMenu";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/review-edit/{id}")
@@ -115,7 +115,7 @@ public class BooksController {
 			return "/books/reviewform";
 		}else {
 			attributes.addFlashAttribute("errorMessage","対象データがありません");
-			return "redirect:/mainMenu";
+			return "redirect:/";
 		}
 	}
 	
@@ -128,13 +128,13 @@ public class BooksController {
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviewsService.updateReviews(reviews);
 		attributes.addFlashAttribute("message","レビューを変更しました");
-		return "redirect:/mainMenu";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/review-delete/{id}")
 	public String reviewDelete(@PathVariable Integer id, RedirectAttributes attributes) {
 		reviewsService.deleteReviews(id);
 		attributes.addFlashAttribute("message","レビューを削除しました");
-		return "redirect:/mainMenu";
+		return "redirect:/";
 	}
 }

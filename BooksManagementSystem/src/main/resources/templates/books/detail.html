@@ -13,9 +13,9 @@
 	<div class="container">
 		<nav>
 			<ul>
-				<li><a th:href="@{/mainMenu/review-form/{id}(id=${books.id})}" class="menu">レビュー投稿</a></li>
-				<li><a th:href="@{/mainMenu/review-edit/{id}(id=${books.id})}" class="menu">レビュー編集</a></li>
-				<li><a th:href="@{/mainMenu}" class="menu">メインメニュー</a></li>
+				<li><a th:href="@{/review-form/{id}(id=${books.id})}" class="menu">レビュー投稿</a></li>
+				<li><a th:href="@{/review-edit/{id}(id=${books.id})}" class="menu">レビュー編集</a></li>
+				<li><a th:href="@{/}" class="menu">メインメニュー</a></li>
 			</ul>
 		</nav>
 		<p class="title">詳細</p>
@@ -77,10 +77,10 @@
 
 			</table>
 		</div>
-		<form th:action="@{/mainMenu/delete/{id}(id=${books.id})}" method="post">
+		<form th:action="@{/delete/{id}(id=${books.id})}" method="post">
 			<input type="submit" value="削除">
 		</form>
-		<form th:action="@{/mainMenu/review-delete/{id}(id=${books.id})}" method="post">
+		<form th:action="@{/review-delete/{id}(id=${books.id})}" method="post">
 			<input type="submit" value="レビュー削除">
 		</form>
 	</div>

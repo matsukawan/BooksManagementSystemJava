@@ -8,7 +8,7 @@
 	
 	<select id="selectById" resultMap="booksResult">
 		SELECT b.id,b.book_name,b.author,b.publisher,b.price,b.isbn,b.num_of_books,b.book_image_url,
-		b.created_at as createdAt,b.updated_at as updatedAt,rating,comment,book_id,r.created_at,r.updated_at
+		b.created_at as createdAt,b.updated_at as updatedAt,emp_id,rating,comment,book_id,r.created_at,r.updated_at
 		FROM books b LEFT JOIN reviews r ON b.id = r.book_id WHERE b.id = #{id}
 	</select>
 	<resultMap type="com.example.demo.entity.Books" id="booksResult">

@@ -13,7 +13,7 @@
 <body>
 	<p class="title">書籍情報新規登録</p>
 	<div class="container">
-		<form th:action="@{/mainMenu/save}" th:object="${booksRegistrationForm}" method="post">
+		<form th:action="@{/save}" th:object="${booksRegistrationForm}" method="post">
 			<div class="mb-4">
 				<label for="isbn" class="form-label">ISBN</label>
 				<input type="text" th:field="*{isbn}" class="form-control" name="isbn" autofocus />
@@ -76,7 +76,7 @@
 			<!--		<input type="submit" value="登録">-->
 		</form>
 	</div>
-	<a th:href="@{/mainMenu}">戻る</a>
+	<a th:href="@{/}">戻る</a>
 	<script>
 		$(function () {
 			$('#getBookInfo').click(function (e) {

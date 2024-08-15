@@ -13,7 +13,8 @@
 	<div class="container">
 		<nav>
 			<ul>
-				<li><a th:href="@{/mainMenu/registration}" class="menu">新規登録</a></li>
+				<li><a th:href="@{/registration}" class="menu">新規登録</a></li>
+				<li><form th:action="@{/logout}" method="post"><input type="submit" value="ログアウト"></form></li>
 			</ul>
 		</nav>
 		<p class="title">一覧表示</p>
@@ -25,7 +26,7 @@
 			<table th:each="books : ${books}" border="1" width="300" class="table" style="margin-bottom: 20px;">
 				<tbody style="text-align: center;">
 					<tr>
-						<th><a th:href="@{/mainMenu/{id}(id=${books.id})}"><img th:src="${books.book_image_url}"
+						<th><a th:href="@{/{id}(id=${books.id})}"><img th:src="${books.book_image_url}"
 									alt="画像" height="300" width="225"></a></th>
 					</tr>
 					<tr>
@@ -34,7 +35,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><a th:href="@{/mainMenu/{id}(id=${books.id})}">詳細</a></td>
+						<td><a th:href="@{/{id}(id=${books.id})}">詳細</a></td>
 					</tr>
 				</tbody>
 			</table>

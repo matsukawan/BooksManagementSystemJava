@@ -14,7 +14,7 @@ public class Employees {
 	private String emp_name;
 	private String emp_id;
 	private String password;
-	private Integer dep_id;
+	private Role dep_id;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 }

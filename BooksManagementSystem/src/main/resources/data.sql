@@ -31,12 +31,13 @@ VALUES ('一般太郎','ippantarou','ippan1',2);
 INSERT INTO employees(emp_name,emp_id,password,dep_id)
 VALUES ('一般次郎','ippanjirou','ippan2',3);
 
+
 --部署
-INSERT INTO depertments(dep_name)
+INSERT INTO departments(dep_name)
 VALUES ('総務部');
 
-INSERT INTO depertments(dep_name)
+INSERT INTO departments(dep_name)
 VALUES ('人事部');
 
-INSERT INTO depertments(dep_name)
+INSERT INTO departments(dep_name)
 VALUES ('開発部');

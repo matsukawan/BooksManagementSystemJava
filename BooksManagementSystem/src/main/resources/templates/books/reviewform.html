@@ -13,7 +13,7 @@
 	<p th:if="${reviewsForm.isNew}">レビュー投稿</p>
 	<p th:unless="${reviewsForm.isNew}">レビュー編集</p>
 	<div class="container">
-		<form th:action="${reviewsForm.isNew} ? @{/mainMenu/review-create/{id}} : @{/mainMenu/update}"
+		<form th:action="${reviewsForm.isNew} ? @{/review-create/{id}} : @{/update}"
 			th:object="${reviewsForm}" method="post">
 			<input type="hidden" th:field="*{id}">
 
@@ -51,7 +51,7 @@
 			<!--		<input th:unless="${reviewsForm.isNew}" type="submit" value="編集">-->
 		</form>
 	</div>
-	<a th:href="@{/mainMenu}" class="btn btn-outline-secondary">戻る</a>
+	<a th:href="@{/}" class="btn btn-outline-secondary">戻る</a>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
 		crossorigin="anonymous"></script>
