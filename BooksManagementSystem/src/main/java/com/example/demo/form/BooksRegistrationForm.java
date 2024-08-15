@@ -2,6 +2,8 @@ package com.example.demo.form;
 
 import jakarta.validation.constraints.NotBlank;
 
+import com.example.demo.annotation.Registered;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ public class BooksRegistrationForm {
 	@NotBlank(message = "出版社名を入力してください")
 	private String publisher;
 	@NotBlank(message = "ISBNを入力してください")
+	@Registered
 	private String isbn;
 	private String book_image_url;
 	private Boolean isNew;

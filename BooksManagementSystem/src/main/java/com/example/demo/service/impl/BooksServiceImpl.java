@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,11 @@ public class BooksServiceImpl implements BooksService{
 	@Override
 	public Books findByIdBooks(Integer id) {
 		return booksMapper.selectById(id);
+	}
+	
+	@Override
+	public Optional<Books> findByIsbn(String isbn) {
+		return booksMapper.selectByIsbn(isbn);
 	}
 	
 	@Override
