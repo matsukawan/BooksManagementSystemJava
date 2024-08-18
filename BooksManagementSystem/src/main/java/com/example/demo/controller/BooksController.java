@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Books;
-import com.example.demo.entity.Employees;
 import com.example.demo.entity.LoginUser;
 import com.example.demo.entity.Reviews;
 import com.example.demo.form.BooksRegistrationForm;
 import com.example.demo.form.ReviewsForm;
 import com.example.demo.helper.BooksRegistrationHelper;
 import com.example.demo.helper.ReviewsHelper;
-import com.example.demo.repository.EmployeesMapper;
 import com.example.demo.service.BooksService;
 import com.example.demo.service.ReviewsService;
 
@@ -35,7 +33,6 @@ import lombok.RequiredArgsConstructor;
 public class BooksController {
 	private final BooksService booksService;
 	private final ReviewsService reviewsService;
-	private final EmployeesMapper employeesMapper;
 
 	@GetMapping
 	public String list(Model model) {
@@ -47,12 +44,10 @@ public class BooksController {
 	public String detail(@PathVariable Integer id, @AuthenticationPrincipal UserDetails userDetails, Model model,
 			RedirectAttributes attributes) {
 		Books books = booksService.findByIdBooks(id);
+		
 		//ログインユーザ情報からemp_idを取得
-		Employees employees = employeesMapper.selectByEmpId(userDetails.getUsername());
 		Reviews loginUserReview = reviewsService.getReviewsForLoggedInUserAndBook(id);
-		System.out.println(id);
-		System.out.println(employees.getId());
-		System.out.println(loginUserReview);
+
 		if (books != null) {
 			model.addAttribute("books", books);
 			model.addAttribute("reviews", books.getReviews());
@@ -129,7 +124,6 @@ public class BooksController {
 
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviews.setEmp_id(empId);
-		System.out.println(reviews);
 		reviewsService.insertReviews(reviews);
 		attributes.addFlashAttribute("message", "レビューを投稿しました。");
 		return "redirect:/";
@@ -137,18 +131,20 @@ public class BooksController {
 
 	@GetMapping("/review-edit/{id}")
 	public String reviewEdit(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
+		
 		Reviews loginUserReview = reviewsService.getReviewsForLoggedInUserAndBook(id);
 
-		System.out.println(loginUserReview);
 		ReviewsForm form = ReviewsHelper.convertReviewsForm(loginUserReview);
-		System.out.println(form);
+		
 		model.addAttribute("reviewsForm", form);
+		
 		return "/books/reviewform";
 
 	}
 
 	@PostMapping("/update")
 	public String update(@Validated ReviewsForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+
 		if (bindingResult.hasErrors()) {
 			form.setIsNew(false);
 			return "/books/reviewform";
@@ -165,8 +161,6 @@ public class BooksController {
 		Reviews reviews = reviewsService.findByIdReviews(review.getId());
 
 		if (reviews != null) {
-			//			System.out.println(reviews.getBook_id());
-			//			System.out.println(review.getEmp_id());
 			reviewsService.deleteReviews(reviews.getBook_id(), review.getEmp_id());
 		}
 
