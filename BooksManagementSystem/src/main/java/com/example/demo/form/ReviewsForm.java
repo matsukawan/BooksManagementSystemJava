@@ -18,7 +18,7 @@ public class ReviewsForm {
 	private Integer rating;
 	@NotBlank(message = "コメントを入力してください")
 	private String comment;
-	private Integer emp_id;
+	private String emp_id;
 	private Integer book_id;
 	private LocalDateTime reviewsCreatedAt;
 	private LocalDateTime reviewsUpdatedAt;

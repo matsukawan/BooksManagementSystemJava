@@ -26,7 +26,7 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService{
 		Employees employees = employeesMapper.selectByEmpId(empId);
 		
 		if(employees != null) {
-			return new LoginUser(employees.getEmp_id(),employees.getPassword(),getAuthorityList(employees.getDep_id()));
+			return new LoginUser(employees.getEmp_id(),employees.getPassword(),getAuthorityList(employees.getDep_id()),employees.getEmp_name(),employees.getId());
 		}else {
 			throw new UsernameNotFoundException(empId + " => 指定しているユーザ名は存在しません");
 		}

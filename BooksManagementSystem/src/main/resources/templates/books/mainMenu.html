@@ -13,8 +13,9 @@
 	<div class="container">
 		<nav>
 			<ul>
-				<li><a th:href="@{/registration}" class="menu">新規登録</a></li>
+				<li><a sec:authorize="hasAuthority('soumu')" th:href="@{/registration}" class="menu">新規登録</a></li>
 				<li><form th:action="@{/logout}" method="post"><input type="submit" value="ログアウト"></form></li>
+				<li><p th:text="${#authentication.principal.emp_name}"></p></li>
 			</ul>
 		</nav>
 		<p class="title">一覧表示</p>

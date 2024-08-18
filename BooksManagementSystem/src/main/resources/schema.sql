@@ -16,7 +16,7 @@ CREATE TABLE books(
 
 CREATE TABLE reviews(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-	emp_id BIGINT,
+	emp_id VARCHAR(255) NOT NULL,
 	rating BIGINT,
 	comment text,
 	book_id BIGINT,

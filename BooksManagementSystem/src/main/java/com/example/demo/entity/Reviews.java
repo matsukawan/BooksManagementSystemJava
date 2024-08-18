@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Reviews {
 	private Integer id;
-	private Integer emp_id;
+	private String emp_id;
 	private Integer rating;
 	private String comment;
 	private Integer book_id;

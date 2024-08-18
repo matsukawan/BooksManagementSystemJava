@@ -6,9 +6,14 @@ import com.example.demo.entity.Reviews;
 
 public interface ReviewsService {
 	List<Reviews> findAllReviews();
+
 	Reviews findByIdReviews(Integer id);
+
 	void insertReviews(Reviews reviews);
+
 	void updateReviews(Reviews reviews);
-	void deleteReviews(Integer id);
+
+	void deleteReviews(Integer id, String emp_id);
+
 	void deleteAllReviews(Integer id);
 }

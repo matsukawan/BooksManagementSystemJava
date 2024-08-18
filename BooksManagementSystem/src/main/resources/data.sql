@@ -10,16 +10,16 @@ VALUES ('フォークナー短編集','W・フォークナー','岩波文庫',55
 
 --レビュー
 INSERT INTO reviews(emp_id,rating,comment,book_id,created_at,updated_at)
-VALUES (1,5,'最高の本でした。',1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+VALUES ('soumutarou',5,'最高の本でした。',1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
 INSERT INTO reviews(emp_id,rating,comment,book_id,created_at,updated_at)
-VALUES (2,5,'控えめに言って最高。',2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+VALUES ('ippantarou',5,'控えめに言って最高。',2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
 INSERT INTO reviews(emp_id,rating,comment,book_id,created_at,updated_at)
-VALUES (2,3,'普通の読後感でした。',3,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+VALUES ('ippantarou',3,'普通の読後感でした。',3,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
 INSERT INTO reviews(emp_id,rating,comment,book_id,created_at,updated_at)
-VALUES (2,4,'最高の本でした',1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+VALUES ('ippanjirou',4,'最高の本でした',1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 
 --社員情報
 INSERT INTO employees(emp_name,emp_id,password,dep_id)
