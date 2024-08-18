@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Books;
 import com.example.demo.entity.Employees;
+import com.example.demo.entity.LoginUser;
 import com.example.demo.entity.Reviews;
 import com.example.demo.form.BooksRegistrationForm;
 import com.example.demo.form.ReviewsForm;
@@ -35,64 +36,67 @@ public class BooksController {
 	private final BooksService booksService;
 	private final ReviewsService reviewsService;
 	private final EmployeesMapper employeesMapper;
-	
+
 	@GetMapping
-	public String list(Model model) {	
-		model.addAttribute("books",booksService.findAllBooks());
+	public String list(Model model) {
+		model.addAttribute("books", booksService.findAllBooks());
 		return "books/mainMenu";
 	}
-	
+
 	@GetMapping("/{id}")
-	public String detail(@PathVariable Integer id,@AuthenticationPrincipal UserDetails userDetails, Model model, RedirectAttributes attributes) {
+	public String detail(@PathVariable Integer id, @AuthenticationPrincipal UserDetails userDetails, Model model,
+			RedirectAttributes attributes) {
 		Books books = booksService.findByIdBooks(id);
 		//ログインユーザ情報からemp_idを取得
 		Employees employees = employeesMapper.selectByEmpId(userDetails.getUsername());
-		List<Reviews> review = reviewsService.getReviewsForLoggedInUserAndBook(id);
+		Reviews loginUserReview = reviewsService.getReviewsForLoggedInUserAndBook(id);
 		System.out.println(id);
 		System.out.println(employees.getId());
-		System.out.println(review);
-		if(books != null) {
+		System.out.println(loginUserReview);
+		if (books != null) {
 			model.addAttribute("books", books);
 			model.addAttribute("reviews", books.getReviews());
-			model.addAttribute("empId", review);	
-			
+			if (loginUserReview != null) {
+				model.addAttribute("loginUserReview", loginUserReview);
+			}
 			return "books/detail";
-		}else {
-			attributes.addFlashAttribute("errorMessage","対象データがありません");
+		} else {
+			attributes.addFlashAttribute("errorMessage", "対象データがありません");
 			return "redirect:/mainMenu";
 		}
 	}
-	
+
 	@GetMapping("/registration")
 	public String newBooks(@ModelAttribute BooksRegistrationForm form) {
 		return "/books/registrationform";
 	}
-	
+
 	@PostMapping("/save")
-	public String registration(@Validated BooksRegistrationForm form, BindingResult bindingResult, RedirectAttributes attributes) {
-		if(bindingResult.hasErrors()) {
+	public String registration(@Validated BooksRegistrationForm form, BindingResult bindingResult,
+			RedirectAttributes attributes) {
+		if (bindingResult.hasErrors()) {
 			form.setIsNew(true);
 			return "books/registrationform";
 		}
 		Books Books = BooksRegistrationHelper.convertBooks(form);
 		booksService.insertBooks(Books);
-		attributes.addFlashAttribute("message","新規書籍情報を登録しました。");
+		attributes.addFlashAttribute("message", "新規書籍情報を登録しました。");
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
 		Books target = booksService.findByIdBooks(id);
-		if(target != null) {
+		if (target != null) {
 			BooksRegistrationForm form = BooksRegistrationHelper.convertBooksRegistrationForm(target);
-			model.addAttribute("booksRegistrationForm",form);
+			model.addAttribute("booksRegistrationForm", form);
 			return "books/registrationform";
-		}else {
-			attributes.addFlashAttribute("errorMessage","対象データがありません。");
+		} else {
+			attributes.addFlashAttribute("errorMessage", "対象データがありません。");
 			return "redirect:/";
 		}
 	}
-	
+
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id, RedirectAttributes attributes) {
 		reviewsService.deleteAllReviews(id);
@@ -100,69 +104,73 @@ public class BooksController {
 		attributes.addFlashAttribute("message", "書籍情報を削除しました。");
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/review-form/{id}")
-	public String newReview(@ModelAttribute ReviewsForm form,Model model) {
+	public String newReview(@ModelAttribute ReviewsForm form, Model model) {
 		form.setIsNew(true);
-		Employees employees = employeesMapper.selectById(form.getId());
-		model.addAttribute(employees);
 		return "books/reviewform";
 	}
-	
+
 	@PostMapping("/review-create/{id}")
-	public String reviewCreate(@Validated ReviewsForm form,BindingResult bindingResult, RedirectAttributes attributes) {
-		if(bindingResult.hasErrors()) {
+	public String reviewCreate(@Validated ReviewsForm form, BindingResult bindingResult,
+			RedirectAttributes attributes) {
+		if (bindingResult.hasErrors()) {
 			form.setIsNew(true);
 			return "/books/reviewform";
 		}
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String empId = null;
+
+		if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+			LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+			empId = loginUser.getEmp_id();
+		}
+
 		Reviews reviews = ReviewsHelper.convertReviews(form);
+		reviews.setEmp_id(empId);
 		System.out.println(reviews);
 		reviewsService.insertReviews(reviews);
-		attributes.addFlashAttribute("message","レビューを投稿しました。");
+		attributes.addFlashAttribute("message", "レビューを投稿しました。");
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/review-edit/{id}")
 	public String reviewEdit(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
-		Reviews target = reviewsService.findByIdReviews(id);
-		if(target != null) {
-			ReviewsForm form = ReviewsHelper.convertReviewsForm(target);
-			//emp_idを取得
-			Employees employees = employeesMapper.selectById(form.getId());
-			
-			//emp_idと入力された値をモデルに注入
-			model.addAttribute(employees);
-			model.addAttribute("reviewsForm",form);
-			return "/books/reviewform";
-		}else {
-			attributes.addFlashAttribute("errorMessage","対象データがありません");
-			return "redirect:/";
-		}
+		Reviews loginUserReview = reviewsService.getReviewsForLoggedInUserAndBook(id);
+
+		System.out.println(loginUserReview);
+		ReviewsForm form = ReviewsHelper.convertReviewsForm(loginUserReview);
+		System.out.println(form);
+		model.addAttribute("reviewsForm", form);
+		return "/books/reviewform";
+
 	}
-	
+
 	@PostMapping("/update")
 	public String update(@Validated ReviewsForm form, BindingResult bindingResult, RedirectAttributes attributes) {
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			form.setIsNew(false);
 			return "/books/reviewform";
 		}
 		Reviews reviews = ReviewsHelper.convertReviews(form);
 		reviewsService.updateReviews(reviews);
-		attributes.addFlashAttribute("message","レビューを変更しました");
+		attributes.addFlashAttribute("message", "レビューを変更しました");
 		return "redirect:/";
 	}
-	
+
 	@PostMapping("/review-delete/{id}")
-	public String reviewDelete(@PathVariable Integer id,RedirectAttributes attributes) {
-		Reviews reviews = reviewsService.findByIdReviews(id);
-		
-		if(reviews != null) {
-			reviewsService.deleteReviews(id,reviews.getEmp_id());	
-			System.out.println(reviews.getEmp_id());
+	public String reviewDelete(@PathVariable Integer id, RedirectAttributes attributes) {
+		Reviews review = reviewsService.getReviewsForLoggedInUserAndBook(id);
+		Reviews reviews = reviewsService.findByIdReviews(review.getId());
+
+		if (reviews != null) {
+			//			System.out.println(reviews.getBook_id());
+			//			System.out.println(review.getEmp_id());
+			reviewsService.deleteReviews(reviews.getBook_id(), review.getEmp_id());
 		}
-		
-		
-		attributes.addFlashAttribute("message","レビューを削除しました");
+
+		attributes.addFlashAttribute("message", "レビューを削除しました");
 		return "redirect:/";
 	}
 }

@@ -11,7 +11,6 @@ public class ReviewsHelper {
 		reviews.setId(form.getId());
 		reviews.setRating(form.getRating());
 		reviews.setComment(form.getComment());
-		reviews.setEmp_id(form.getEmp_id());
 		reviews.setBook_id(reviews.getBook_id());
 		return reviews;
 	}

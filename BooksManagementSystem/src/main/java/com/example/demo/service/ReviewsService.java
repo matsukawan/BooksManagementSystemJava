@@ -17,5 +17,5 @@ public interface ReviewsService {
 
 	void deleteAllReviews(Integer id);
 	
-	List<Reviews> getReviewsForLoggedInUserAndBook(Integer bookId);
+	Reviews getReviewsForLoggedInUserAndBook(Integer bookId);
 }

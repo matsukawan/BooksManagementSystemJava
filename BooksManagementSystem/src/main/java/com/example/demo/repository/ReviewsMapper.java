@@ -15,5 +15,5 @@ public interface ReviewsMapper {
 	void update(Reviews reviews);
 	void delete(@Param("book_id") Integer id,String emp_id);
 	void deleteAll(@Param("book_id") Integer id);
-	List<Reviews> selectReviewsByUserIdAndBookId(@Param("empId") String emp_id,@Param("bookId") Integer book_id);
+	Reviews selectReviewsByUserIdAndBookId(@Param("empId") String emp_id,@Param("bookId") Integer book_id);
 }

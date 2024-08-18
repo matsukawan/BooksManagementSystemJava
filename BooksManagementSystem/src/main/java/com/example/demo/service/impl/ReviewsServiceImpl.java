@@ -55,7 +55,7 @@ public class ReviewsServiceImpl implements ReviewsService {
 	}
 	
 	@Override
-	public List<Reviews> getReviewsForLoggedInUserAndBook(Integer bookId) {
+	public Reviews getReviewsForLoggedInUserAndBook(Integer bookId) {
 		
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = null;

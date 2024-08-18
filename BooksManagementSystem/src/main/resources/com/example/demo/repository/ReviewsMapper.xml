@@ -27,8 +27,7 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM reviews WHERE id = #{book_id} AND emp_id
-		= #{emp_id}
+		DELETE FROM reviews WHERE book_id = #{book_id} AND emp_id = #{emp_id}
 	</delete>
 
 	<delete id="deleteAll">
