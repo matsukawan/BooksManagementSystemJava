@@ -7,5 +7,6 @@ import com.example.demo.entity.Employees;
 @Mapper
 public interface EmployeesMapper {
 	Employees selectByEmpId(String empId);
+
 	Employees selectById(Integer Id);
 }

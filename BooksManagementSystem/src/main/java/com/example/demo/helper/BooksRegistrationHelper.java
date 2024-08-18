@@ -13,7 +13,7 @@ public class BooksRegistrationHelper {
 		books.setBook_image_url(form.getBook_image_url());
 		return books;
 	}
-	
+
 	public static BooksRegistrationForm convertBooksRegistrationForm(Books books) {
 		BooksRegistrationForm form = new BooksRegistrationForm();
 		form.setBook_name(books.getBook_name());

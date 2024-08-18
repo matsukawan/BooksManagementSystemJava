@@ -11,8 +11,12 @@ import com.example.demo.entity.Books;
 @Mapper
 public interface BooksMapper {
 	List<Books> selectAll();
+
 	Books selectById(@Param("id") Integer id);
+
 	Optional<Books> selectByIsbn(@Param("isbn") String isbn);
+
 	void insert(Books books);
+
 	void delete(@Param("id") Integer id);
 }

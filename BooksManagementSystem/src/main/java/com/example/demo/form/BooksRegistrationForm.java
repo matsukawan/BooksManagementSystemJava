@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BooksRegistrationForm {
-//	private Integer id;
+	//	private Integer id;
 	@NotBlank(message = "書籍名を入力してください")
 	private String book_name;
 	@NotBlank(message = "著者名を入力してください")

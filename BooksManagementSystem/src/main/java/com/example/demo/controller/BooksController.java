@@ -44,7 +44,7 @@ public class BooksController {
 	public String detail(@PathVariable Integer id, @AuthenticationPrincipal UserDetails userDetails, Model model,
 			RedirectAttributes attributes) {
 		Books books = booksService.findByIdBooks(id);
-		
+
 		//ログインユーザ情報からemp_idを取得
 		Reviews loginUserReview = reviewsService.getReviewsForLoggedInUserAndBook(id);
 
@@ -131,13 +131,13 @@ public class BooksController {
 
 	@GetMapping("/review-edit/{id}")
 	public String reviewEdit(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
-		
+
 		Reviews loginUserReview = reviewsService.getReviewsForLoggedInUserAndBook(id);
 
 		ReviewsForm form = ReviewsHelper.convertReviewsForm(loginUserReview);
-		
+
 		model.addAttribute("reviewsForm", form);
-		
+
 		return "/books/reviewform";
 
 	}

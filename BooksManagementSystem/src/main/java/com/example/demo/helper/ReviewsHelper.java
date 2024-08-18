@@ -5,7 +5,6 @@ import com.example.demo.form.ReviewsForm;
 
 public class ReviewsHelper {
 
-	
 	public static Reviews convertReviews(ReviewsForm form) {
 		Reviews reviews = new Reviews();
 		reviews.setId(form.getId());
@@ -14,7 +13,7 @@ public class ReviewsHelper {
 		reviews.setBook_id(reviews.getBook_id());
 		return reviews;
 	}
-	
+
 	public static ReviewsForm convertReviewsForm(Reviews reviews) {
 		ReviewsForm form = new ReviewsForm();
 		form.setId(reviews.getId());

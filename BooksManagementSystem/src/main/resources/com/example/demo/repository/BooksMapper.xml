@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.BooksMapper">
-	<select id="selectAll" resultType="com.example.demo.entity.Books">
-		SELECT id,book_name,author,publisher,price,isbn,num_of_books,book_image_url,
+	<select id="selectAll"
+		resultType="com.example.demo.entity.Books">
+		SELECT
+		id,book_name,author,publisher,price,isbn,num_of_books,book_image_url,
 		created_at as createdAt,updated_at as updatedAt FROM books
 	</select>
-	
+
 	<select id="selectById" resultMap="booksResult">
-		SELECT b.id,b.book_name,b.author,b.publisher,b.price,b.isbn,b.num_of_books,b.book_image_url,
-		b.created_at as createdAt,b.updated_at as updatedAt,emp_id,rating,comment,book_id,r.created_at,r.updated_at
-		FROM books b LEFT JOIN reviews r ON b.id = r.book_id WHERE b.id = #{id}
+		SELECT
+		b.id,b.book_name,b.author,b.publisher,b.price,b.isbn,b.num_of_books,b.book_image_url,
+		b.created_at as createdAt,b.updated_at as
+		updatedAt,emp_id,rating,comment,book_id,r.created_at,r.updated_at
+		FROM
+		books b LEFT JOIN reviews r ON b.id = r.book_id WHERE b.id = #{id}
 	</select>
-	<resultMap type="com.example.demo.entity.Books" id="booksResult">
-		<id column="id" property="id"/>
-			<result column="book_name" property="book_name"/>
-		    <result column="author" property="author"/>
-		    <result column="publisher" property="publisher"/>
-		    <result column="price" property="price"/>
-		    <result column="isbn" property="isbn"/>
-		    <result column="num_of_books" property="num_of_books"/>
-		    <result column="book_image_url" property="book_image_url"/>
-		    <result column="createdAt" property="createdAt"/>
-		    <result column="updatedAt" property="updatedAt"/>
-			<collection property="reviews" ofType="com.example.demo.entity.Reviews">
-				<result column="id" property="id"/>
-				<result column="emp_id" property="emp_id"/>
-				<result column="rating" property="rating"/>
-				<result column="comment" property="comment"/>
-				<result column="book_id" property="book_id"/>
-				<result column="created_at" property="reviewsCreatedAt"/>
-				<result column="updated_at" property="reviewsUpdatedAt"/>
-			</collection>
+	<resultMap type="com.example.demo.entity.Books"
+		id="booksResult">
+		<id column="id" property="id" />
+		<result column="book_name" property="book_name" />
+		<result column="author" property="author" />
+		<result column="publisher" property="publisher" />
+		<result column="price" property="price" />
+		<result column="isbn" property="isbn" />
+		<result column="num_of_books" property="num_of_books" />
+		<result column="book_image_url" property="book_image_url" />
+		<result column="createdAt" property="createdAt" />
+		<result column="updatedAt" property="updatedAt" />
+		<collection property="reviews"
+			ofType="com.example.demo.entity.Reviews">
+			<result column="id" property="id" />
+			<result column="emp_id" property="emp_id" />
+			<result column="rating" property="rating" />
+			<result column="comment" property="comment" />
+			<result column="book_id" property="book_id" />
+			<result column="created_at" property="reviewsCreatedAt" />
+			<result column="updated_at" property="reviewsUpdatedAt" />
+		</collection>
 	</resultMap>
-	
+
 	<insert id="insert">
-		INSERT INTO books(book_name,author,publisher,price,isbn,num_of_books,book_image_url,
+		INSERT INTO
+		books(book_name,author,publisher,price,isbn,num_of_books,book_image_url,
 		created_at,updated_at)
-		VALUES (#{book_name},#{author},#{publisher},#{price},#{isbn},#{num_of_books},#{book_image_url},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+		VALUES
+		(#{book_name},#{author},#{publisher},#{price},#{isbn},#{num_of_books},#{book_image_url},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
 	</insert>
-	
+
 	<delete id="delete">
 		DELETE FROM books WHERE id = #{id}
 	</delete>
-	
-	<select id="selectByIsbn" resultType="com.example.demo.entity.Books">
+
+	<select id="selectByIsbn"
+		resultType="com.example.demo.entity.Books">
 		SELECT isbn FROM books WHERE isbn = #{isbn}
 	</select>
 

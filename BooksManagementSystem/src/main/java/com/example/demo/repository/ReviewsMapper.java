@@ -10,10 +10,16 @@ import com.example.demo.entity.Reviews;
 @Mapper
 public interface ReviewsMapper {
 	List<Reviews> selectAll();
+
 	Reviews selectById(@Param("book_id") Integer id);
+
 	void insert(Reviews reviews);
+
 	void update(Reviews reviews);
-	void delete(@Param("book_id") Integer id,String emp_id);
+
+	void delete(@Param("book_id") Integer id, String emp_id);
+
 	void deleteAll(@Param("book_id") Integer id);
-	Reviews selectReviewsByUserIdAndBookId(@Param("empId") String emp_id,@Param("bookId") Integer book_id);
+
+	Reviews selectReviewsByUserIdAndBookId(@Param("empId") String emp_id, @Param("bookId") Integer book_id);
 }

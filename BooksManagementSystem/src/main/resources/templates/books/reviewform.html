@@ -14,10 +14,10 @@
 	<p th:unless="${reviewsForm.isNew}">レビュー編集</p>
 
 	<div class="container">
-		<form th:action="${reviewsForm.isNew} ? @{/review-create/{id}} : @{/update}"
-			th:object="${reviewsForm}" method="post">
+		<form th:action="${reviewsForm.isNew} ? @{/review-create/{id}} : @{/update}" th:object="${reviewsForm}"
+			method="post">
 			<input type="hidden" th:field="*{id}">
-	
+
 			<div class="mb-3">
 				<label for="rating" class="form-label">おすすめ度：</label>
 				<input type="number" th:field="*{rating}" min="1" max="5" 　class="form-control" />

@@ -13,8 +13,10 @@
 	<div class="container">
 		<nav>
 			<ul>
-				<li th:unless="${loginUserReview != null}"><a th:href="@{/review-form/{id}(id=${books.id})}" class="menu">レビュー投稿</a></li>
-				<li th:if="${loginUserReview != null}"><a th:href="@{/review-edit/{id}(id=${books.id})}" class="menu">レビュー編集</a></li>
+				<li th:unless="${loginUserReview != null}"><a th:href="@{/review-form/{id}(id=${books.id})}"
+						class="menu">レビュー投稿</a></li>
+				<li th:if="${loginUserReview != null}"><a th:href="@{/review-edit/{id}(id=${books.id})}"
+						class="menu">レビュー編集</a></li>
 				<li><a th:href="@{/}" class="menu">メインメニュー</a></li>
 			</ul>
 		</nav>
@@ -25,7 +27,7 @@
 			</thead>
 			<tr>
 				<th>書籍名</th>
-				<td th:text="${books.book_name}"></td>
+				<td th:text="${books.book_name}" th:class="box"></td>
 			</tr>
 			<tr>
 				<th>著者</th>
@@ -78,7 +80,7 @@
 			</table>
 		</div>
 		<form sec:authorize="hasAuthority('soumu')" th:action="@{/delete/{id}(id=${books.id})}" method="post">
-			<input type="submit" value="削除">
+			<input type="submit" value="書籍情報削除">
 		</form>
 		<form th:if="${loginUserReview != null}" th:action="@{/review-delete/{id}(id=${books.id})}" method="post">
 			<input type="submit" value="レビュー削除">

@@ -53,20 +53,20 @@ public class ReviewsServiceImpl implements ReviewsService {
 	public void deleteAllReviews(Integer id) {
 		reviewsMapper.deleteAll(id);
 	}
-	
+
 	@Override
 	public Reviews getReviewsForLoggedInUserAndBook(Integer bookId) {
-		
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = null;
-        
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            username = userDetails.getUsername();
-        }
 
-        Employees loginUser = employeesMapper.selectByEmpId(username);
-        return reviewsMapper.selectReviewsByUserIdAndBookId(loginUser.getEmp_id(), bookId);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = null;
+
+		if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+			username = userDetails.getUsername();
+		}
+
+		Employees loginUser = employeesMapper.selectByEmpId(username);
+		return reviewsMapper.selectReviewsByUserIdAndBookId(loginUser.getEmp_id(), bookId);
 	}
 
 }

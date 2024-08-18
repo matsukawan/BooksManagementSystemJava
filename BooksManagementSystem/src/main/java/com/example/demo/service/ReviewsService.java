@@ -16,6 +16,6 @@ public interface ReviewsService {
 	void deleteReviews(Integer id, String emp_id);
 
 	void deleteAllReviews(Integer id);
-	
+
 	Reviews getReviewsForLoggedInUserAndBook(Integer bookId);
 }

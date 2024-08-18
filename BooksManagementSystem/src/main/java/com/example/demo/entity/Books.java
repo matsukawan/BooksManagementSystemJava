@@ -22,5 +22,5 @@ public class Books {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	private List<Reviews> reviews;
-	
+
 }

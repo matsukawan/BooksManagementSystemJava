@@ -83,22 +83,24 @@
 				e.preventDefault();
 				const isbn = $("#isbn").val();
 				const url = "https://api.openbd.jp/v1/get?isbn=" + isbn;
-				const image = "https://ndlsearch.ndl.go.jp/thumbnail/" + isbn + ".jpg"
+				const fallbackImage = "/img/noimage.png";
+				let image = "https://ndlsearch.ndl.go.jp/thumbnail/" + isbn + ".jpg"
+
 
 				$.getJSON(url, function (data) {
 					if (data[0] == null) {
 						alert("データが見つかりません");
 					} else {
 						let coverImage = data[0].summary.cover;
-						if (data[0].summary.cover == "") {
+
+						if (!coverImage) {
 							coverImage = image;
-						} else {
-							$("#thumbnail").html('<img src=\"' + image + '\" style=\"border:solid 1px #000000\" />');
+							$("#thumbnail").html('<img src="' + coverImage + '" style="border:solid 1px #000000" onerror="this.onerror=null;this.src=\'' + fallbackImage + '\';" />');
 						}
 						$("#book_name").val(data[0].summary.title);
 						$("#publisher").val(data[0].summary.publisher);
 						$("#author").val(data[0].summary.author);
-						$("#book_image_url").val(image);
+						$("#book_image_url").val(coverImage);
 					}
 				});
 			});
