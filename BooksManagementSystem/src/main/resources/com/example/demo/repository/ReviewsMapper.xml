@@ -27,10 +27,17 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM reviews WHERE id = #{book_id} AND emp_id = #{emp_id}
+		DELETE FROM reviews WHERE id = #{book_id} AND emp_id
+		= #{emp_id}
 	</delete>
 
 	<delete id="deleteAll">
 		DELETE FROM reviews WHERE book_id = #{book_id}
 	</delete>
+
+	<select id="selectReviewsByUserIdAndBookId" resultType="com.example.demo.entity.Reviews">
+		SELECT id, comment, emp_id, book_id
+		FROM reviews
+		WHERE emp_id = #{empId} AND book_id = #{bookId}
+	</select>
 </mapper>

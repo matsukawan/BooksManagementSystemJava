@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,19 +43,18 @@ public class BooksController {
 	}
 	
 	@GetMapping("/{id}")
-	public String detail(@PathVariable Integer id, Model model, RedirectAttributes attributes) {
+	public String detail(@PathVariable Integer id,@AuthenticationPrincipal UserDetails userDetails, Model model, RedirectAttributes attributes) {
 		Books books = booksService.findByIdBooks(id);
-		Reviews target = reviewsService.findByIdReviews(id);
+		//ログインユーザ情報からemp_idを取得
+		Employees employees = employeesMapper.selectByEmpId(userDetails.getUsername());
+		List<Reviews> review = reviewsService.getReviewsForLoggedInUserAndBook(id);
 		System.out.println(id);
-		System.out.println(books);
-//		System.out.println(target.getBook_id());
+		System.out.println(employees.getId());
+		System.out.println(review);
 		if(books != null) {
 			model.addAttribute("books", books);
 			model.addAttribute("reviews", books.getReviews());
-			if(target != null) {
-				model.addAttribute("BookId", target);	
-				System.out.println(target);
-			}
+			model.addAttribute("empId", review);	
 			
 			return "books/detail";
 		}else {

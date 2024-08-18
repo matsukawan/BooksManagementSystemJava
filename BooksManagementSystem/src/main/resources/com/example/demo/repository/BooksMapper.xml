@@ -46,4 +46,5 @@
 	<select id="selectByIsbn" resultType="com.example.demo.entity.Books">
 		SELECT isbn FROM books WHERE isbn = #{isbn}
 	</select>
+
 </mapper>
