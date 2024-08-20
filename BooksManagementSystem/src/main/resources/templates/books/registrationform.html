@@ -95,7 +95,6 @@
 
 						if (!coverImage) {
 							coverImage = image;
-							$("#thumbnail").html('<img src="' + coverImage + '" style="border:solid 1px #000000" onerror="this.onerror=null;this.src=\'' + fallbackImage + '\';" />');
 						}
 						$("#book_name").val(data[0].summary.title);
 						$("#publisher").val(data[0].summary.publisher);

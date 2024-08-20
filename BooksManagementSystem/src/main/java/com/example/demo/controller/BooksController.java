@@ -74,6 +74,7 @@ public class BooksController {
 			return "books/registrationform";
 		}
 		Books Books = BooksRegistrationHelper.convertBooks(form);
+		System.out.println(form);
 		booksService.insertBooks(Books);
 		attributes.addFlashAttribute("message", "新規書籍情報を登録しました。");
 		return "redirect:/";

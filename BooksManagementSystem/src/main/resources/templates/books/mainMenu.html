@@ -32,7 +32,7 @@
 				<tbody style="text-align: center;">
 					<tr>
 						<th><a th:href="@{/{id}(id=${books.id})}"><img th:src="${books.book_image_url}" alt="画像"
-									height="300" width="225"></a></th>
+									height="300" width="225" onerror="this.onerror=null;this.src='/img/noimage.png'" /></a></th>
 					</tr>
 					<tr>
 						<td>
