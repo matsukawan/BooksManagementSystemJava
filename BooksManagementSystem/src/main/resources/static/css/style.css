@@ -59,11 +59,13 @@ body {
 }
 
 nav {
-	width: 100%;
+	width: 1300px;
 	height: 40px;
-	background-color: transparent;
+	background-image: url("/img/kami.png");
 	padding-top: 5px;
 	box-sizing: border-box;
+	position: fixed;
+	
 
 }
 
